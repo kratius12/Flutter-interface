@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:prueba/carObra.dart';
 import 'package:prueba/cardService.dart';
@@ -22,7 +20,7 @@ class ServicioPage extends StatefulWidget{
 class _ServicioPageState extends State<ServicioPage>{
 
   // ignore: unused_field
-  String _servicio = '';
+  Calendaroip calendario = const Calendaroip();
   final _formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -52,7 +50,7 @@ class _ServicioPageState extends State<ServicioPage>{
           padding: EdgeInsets.zero,
           children: <Widget> [
             DrawerHeader(
-              child:Text('Menu',
+              child:Text('CONSTRU-TECH',
               style: TextStyle(color:  Colors.blue),),
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 160, 190, 227),
@@ -132,7 +130,7 @@ class _ServicioPageState extends State<ServicioPage>{
                           padding: const EdgeInsets.only(top: 15),
                           child: TextFormField(
                             decoration: const InputDecoration(
-                                hintText: 'Que servicio necesitas?',
+                                hintText: 'Nombre',
                                 hintStyle:
                                 TextStyle(fontWeight: FontWeight.w600),
                                 fillColor: Color.fromARGB(255, 198, 198, 198),
@@ -147,17 +145,17 @@ class _ServicioPageState extends State<ServicioPage>{
                                 filled: true),
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "Nombre del servicio es requerido";
+                                return "El nombre es requerido";
                               } else {
                                 return null;
                               }
                             },
                           )),
-                      Padding(
+                          Padding(
                           padding: const EdgeInsets.only(top: 15),
                           child: TextFormField(
                             decoration: const InputDecoration(
-                                hintText: 'En que fecha podemos visitarte?',
+                                hintText: 'Apellidos',
                                 hintStyle:
                                 TextStyle(fontWeight: FontWeight.w600),
                                 fillColor: Color.fromARGB(255, 198, 198, 198),
@@ -172,17 +170,61 @@ class _ServicioPageState extends State<ServicioPage>{
                                 filled: true),
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "Fecha del servicio es requerida";
+                                return "Los apellidos son requeridos";
+                              } else {
+                                return null;
+                              }
+                            },
+                          )),Padding(
+                          padding: const EdgeInsets.only(top: 15),
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                                hintText: 'Seleccione la fecha de la cita',
+                                hintStyle:
+                                TextStyle(fontWeight: FontWeight.w600),
+                                fillColor: Color.fromARGB(255, 198, 198, 198),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 0, style: BorderStyle.none),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 0, style: BorderStyle.none),
+                                ),
+                                filled: true)
+                                ,enabled: false,
+                          )),
+                        calendario,
+                      Padding(
+                          padding: const EdgeInsets.only(top: 15),
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                                hintText: '¿Que servicio desea cotizar?',
+                                hintStyle:
+                                TextStyle(fontWeight: FontWeight.w600),
+                                fillColor: Color.fromARGB(255, 198, 198, 198),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 0, style: BorderStyle.none),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 0, style: BorderStyle.none),
+                                ),
+                                filled: true),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "El servicio es requerido";
                               } else {
                                 return null;
                               }
                             },
                           )),
-                      Padding(
+                          Padding(
                           padding: const EdgeInsets.only(top: 15),
                           child: TextFormField(
                             decoration: const InputDecoration(
-                                hintText: '¿Cual es la direccion?',
+                                hintText: 'Telefono',
                                 hintStyle:
                                 TextStyle(fontWeight: FontWeight.w600),
                                 fillColor: Color.fromARGB(255, 198, 198, 198),
@@ -197,7 +239,81 @@ class _ServicioPageState extends State<ServicioPage>{
                                 filled: true),
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "¿Direccion del servicio es requerida";
+                                return "El telefono es requerido";
+                              } else {
+                                return null;
+                              }
+                            },
+                          )),
+                          Padding(
+                          padding: const EdgeInsets.only(top: 15),
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                                hintText: 'Antioquia',
+                                hintStyle:
+                                TextStyle(fontWeight: FontWeight.w600),
+                                fillColor: Color.fromARGB(255, 198, 198, 198),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 0, style: BorderStyle.none),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 0, style: BorderStyle.none),
+                                ),
+                                filled: true),enabled: false,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "El departamento es requerido";
+                              } else {
+                                return null;
+                              }
+                            },
+                          )),Padding(
+                          padding: const EdgeInsets.only(top: 15),
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                                hintText: 'Municipio',
+                                hintStyle:
+                                TextStyle(fontWeight: FontWeight.w600),
+                                fillColor: Color.fromARGB(255, 198, 198, 198),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 0, style: BorderStyle.none),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 0, style: BorderStyle.none),
+                                ),
+                                filled: true),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "El municipio es requerido";
+                              } else {
+                                return null;
+                              }
+                            },
+                          )),
+                          Padding(
+                          padding: const EdgeInsets.only(top: 15),
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                                hintText: 'Dirección',
+                                hintStyle:
+                                TextStyle(fontWeight: FontWeight.w600),
+                                fillColor: Color.fromARGB(255, 198, 198, 198),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 0, style: BorderStyle.none),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 0, style: BorderStyle.none),
+                                ),
+                                filled: true),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "La dirección es requerida";
                               } else {
                                 return null;
                               }
@@ -269,4 +385,47 @@ class _ServicioPageState extends State<ServicioPage>{
       ),
     );
   }
+}
+
+class Calendaroip extends StatefulWidget {
+  const Calendaroip({super.key});
+
+  @override
+  State<Calendaroip> createState() => _CalendaroipState();
+}
+
+class _CalendaroipState extends State<Calendaroip> {
+  DateTime? _selectdate; 
+  var _currentTime = TimeOfDay.now();
+  @override
+  
+  Widget build(BuildContext context) {
+    return ElevatedButton(onPressed: _presPacker, child: const Icon(Icons.calendar_today_rounded));
+  }
+    void _presPacker(){
+  showDatePicker(
+    context: context, 
+    initialDate: DateTime.now(), 
+    firstDate: DateTime(2020),
+    lastDate: DateTime.now())
+    .then((pickedDate){
+      if(pickedDate==null){
+        return;
+      }
+      setState(() {
+        _selectdate=pickedDate;
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar
+        (content : Text(" Ha selecionado esta fecha ${_selectdate}")));
+      });
+    });
+}
+Future<TimeOfDay?> getTime(){
+  return showTimePicker(context: context, 
+  initialTime: _currentTime,
+  builder: (context, child){
+    return Theme(data: ThemeData.dark(), child: Text(""));
+  }
+  );
+
+}
 }

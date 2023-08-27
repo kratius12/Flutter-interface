@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:prueba/carObra.dart';
 import 'package:prueba/main.dart';
@@ -14,7 +16,6 @@ class cardService extends StatelessWidget{
       key: scaffoldKey,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
-        title: Text ("sapo hijueputa"),
         leading: IconButton(
           icon: Icon(Icons.menu,
           color: Colors.black
@@ -92,7 +93,7 @@ class cardService extends StatelessWidget{
           mainAxisSize: MainAxisSize.max,
           children: <Widget> [
             const ListTile(
-              leading: Icon(Icons.album),
+              leading: Icon(Icons.album, color: Colors.green,),
               title: Text("Ronald Ortiz Arango"),
               subtitle: Text("16/01/2024\n Estucado y pintado"),
               
@@ -100,25 +101,38 @@ class cardService extends StatelessWidget{
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget> [
-                TextButton.icon( icon: Icon(Icons.calendar_month), label: Text.rich(TextSpan(children: <InlineSpan>[WidgetSpan(child: Text("Editar"))])), onPressed: () {  },),
+                TextButton.icon( icon: Icon(Icons.calendar_month), label: Text.rich(TextSpan(children: <InlineSpan>[WidgetSpan(child: Text("Editar"))])), onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                    const ServicioPage(title: "Servicio Page"))); },),
                 TextButton.icon( icon: Icon(Icons.cancel), label: Text.rich(TextSpan(children: <InlineSpan>[WidgetSpan(child: Text("Eliminar"))])), onPressed: () {  },),
               ]
-    ),
-     Center(
-      child : FloatingActionButton(onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>const ServicioPage(title: "Servicio Page")));
-      }, child: const Icon(Icons.navigation),
-      
-      
-      ),
-      
-      
-    )
+          ),
           ]
         )
       ),
-      
-      ), floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      ),floatingActionButton: bottom(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat, 
       );
+  }
+}
+
+class bottom extends StatelessWidget{
+  const bottom({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                const SizedBox(width: 16),
+
+                FloatingActionButton.extended(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                    const ServicioPage(title: "Servicio Page")));
+                  },
+                  label: const Text('Agendar'),
+                  icon: const Icon(Icons.add),
+                ),
+              ],
+            );
   }
 }
