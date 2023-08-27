@@ -46,15 +46,20 @@ class _ServicioPageState extends State<ServicioPage>{
       ),
       drawer: Drawer(
         child: ListView (
-
           padding: EdgeInsets.zero,
           children: <Widget> [
             DrawerHeader(
-              child:Text('CONSTRU-TECH',
-              style: TextStyle(color:  Colors.blue),),
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 160, 190, 227),
+              child:Container(
+                height: 110,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage("https://i.imgur.com/knxT0t0.png", ),
+                    
+                    fit: BoxFit.contain, 
+                  )
+                ),
               ),
+              
             ),
             ListTile(
               leading: Icon(Icons.person_2_outlined),

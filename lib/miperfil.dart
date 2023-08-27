@@ -44,12 +44,16 @@ class _MiPerfil extends State<MiPerfil>{
             padding: EdgeInsets.zero,
             children: <Widget> [
               DrawerHeader(
-                child:Text('Menu',
-                style: TextStyle(color:  Colors.blue),),
+              child:Container(
+                height: 110,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 160, 190, 227),
+                  image: DecorationImage(
+                    image: NetworkImage("https://i.imgur.com/knxT0t0.png", ),    
+                    fit: BoxFit.contain, 
+                  )
                 ),
               ),
+            ),
               ListTile(
                 leading: Icon(Icons.person_2_outlined),
                 title: Text('Mi perfil'),

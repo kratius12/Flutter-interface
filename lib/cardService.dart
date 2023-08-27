@@ -34,12 +34,18 @@ class cardService extends StatelessWidget{
 
           padding: EdgeInsets.zero,
           children: <Widget> [
-            DrawerHeader(
-              child:Text('Menu',
-              style: TextStyle(color:  Colors.blue),),
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 160, 190, 227),
+          DrawerHeader(
+              child:Container(
+                height: 110,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage("https://i.imgur.com/knxT0t0.png", ),
+                    
+                    fit: BoxFit.contain, 
+                  )
+                ),
               ),
+              
             ),
             ListTile(
               leading: Icon(Icons.person_2_outlined),
