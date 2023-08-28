@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prueba/login.dart';
 
 
 class _RegisterPageState extends State<RegisterPage> {
@@ -267,6 +268,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                     backgroundColor:
                                         const Color.fromARGB(255, 12, 195, 106),
                                   ));
+                                }if(_formKey.currentState!.validate()){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage(title: "Login ")));
                                 }
                               },
                               style: ElevatedButton.styleFrom(

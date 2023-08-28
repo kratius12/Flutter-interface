@@ -371,8 +371,8 @@ class _ServicioPageState extends State<ServicioPage>{
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => const ServicioPage(
-                                              title: "Solicitar servicio")));
+                                          builder: (context) => cardService(
+                                              )));
                                 }},
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:
