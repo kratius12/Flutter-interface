@@ -12,11 +12,11 @@ class cardObra extends StatelessWidget{
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.onPrimary,
-        title: Text ("sapo hijueputa"),
+        backgroundColor: Theme.of(context).shadowColor,
+        title: Text ("Solicitar cita", style: TextStyle(color: Colors.white),),
         leading: IconButton(
           icon: Icon(Icons.menu,
-          color: Colors.black
+          color: Colors.white
           ),
           onPressed: () {
             if (scaffoldKey.currentState!.isDrawerOpen) {
@@ -95,7 +95,7 @@ class cardObra extends StatelessWidget{
           mainAxisSize: MainAxisSize.max,
           children: <Widget> [
             const ListTile(
-              leading: Icon(Icons.album),
+              leading: Icon(Icons.album, color: Colors.green,),
               title: Text("Estuco y pintura"),
               subtitle: Text("Kevin Castrillon\n 2 dias\n en proceso"),
             ),

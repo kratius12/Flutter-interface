@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:prueba/carObra.dart';
 import 'package:prueba/cardService.dart';
-import 'package:prueba/main.dart';
-import 'package:prueba/miperfil.dart';
+import 'package:prueba/databasehelper.dart';
+
 
 
 
@@ -20,108 +19,34 @@ class ServicioPage extends StatefulWidget{
 class _ServicioPageState extends State<ServicioPage>{
 
   // ignore: unused_field
+  int? selectedId;
   Calendaroip calendario = const Calendaroip();
   final _formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final  nombreController = TextEditingController();
+  final  apellidosController = TextEditingController();
+  final  fechaController = TextEditingController();
+  final  tipoServController = TextEditingController();
+  final  telefonoController = TextEditingController();
+  final  municipioController = TextEditingController();
+  final  direccionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.onPrimary,
-        title: Text ("Servicios", style: TextStyle(color: Colors.black),),
-        leading: IconButton(
-          icon: Icon(Icons.menu,
-          color: Colors.black
-          ),
-          onPressed: () {
-            if (scaffoldKey.currentState!.isDrawerOpen) {
-              scaffoldKey.currentState!.closeDrawer();
-            }else{
-              scaffoldKey.currentState!.openDrawer();
-            }
-          },
-        ),
-      ),
-      drawer: Drawer(
-        child: ListView (
-          padding: EdgeInsets.zero,
-          children: <Widget> [
-            DrawerHeader(
-              child:Container(
-                height: 110,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage("https://i.imgur.com/knxT0t0.png", ),
-                    
-                    fit: BoxFit.contain, 
-                  )
-                ),
-              ),
-              
-            ),
-            ListTile(
-              leading: Icon(Icons.person_2_outlined),
-              title: Text('Mi perfil'),
-              
-              onTap: () {
-                Navigator.push(context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const MiPerfil(title: "Mi perfil",)));
-              }
-            ),
-            ListTile(
-              leading: Icon(Icons.calendar_month),
-              title: Text('Citas'),
-              onTap: () {
-                Navigator.push(context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                   cardService()));
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.build),
-              title: Text('Obras y tiempos'),
-              onTap: () {
-                Navigator.push(context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  cardObra()));
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.power_settings_new),
-              title: Text('Cerrar sesión'),
-              onTap: (){
-                (Navigator.push(context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const HomePageApp(title: "Pagina de inicio",))));
-              },
-            )
-            
-          ],
-        ),
+        
+        backgroundColor: Theme.of(context).shadowColor,
+        title: Text ("Solicitar cita", style: TextStyle(color: Colors.white),),
+        
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: const EdgeInsets.only(top: 40, left: 10, right: 10),
+          margin: const EdgeInsets.only( left: 10, right: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Container(
-                margin: const EdgeInsets.only(top: 20),
-                child: const Text(
-                  'Solicita servicio',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.deepOrange),
-                ),
-              ),
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: Text('',
@@ -134,6 +59,7 @@ class _ServicioPageState extends State<ServicioPage>{
                       Padding(
                           padding: const EdgeInsets.only(top: 15),
                           child: TextFormField(
+                            controller: nombreController,
                             decoration: const InputDecoration(
                                 hintText: 'Nombre',
                                 hintStyle:
@@ -159,6 +85,7 @@ class _ServicioPageState extends State<ServicioPage>{
                           Padding(
                           padding: const EdgeInsets.only(top: 15),
                           child: TextFormField(
+                            controller: apellidosController,
                             decoration: const InputDecoration(
                                 hintText: 'Apellidos',
                                 hintStyle:
@@ -181,9 +108,11 @@ class _ServicioPageState extends State<ServicioPage>{
                               }
                             },
                           )),Padding(
-                          padding: const EdgeInsets.only(top: 15),
+                          padding: const EdgeInsets.only(top: 15, right: 1),
                           child: TextFormField(
+                            controller: fechaController,
                             decoration: const InputDecoration(
+
                                 hintText: 'Seleccione la fecha de la cita',
                                 hintStyle:
                                 TextStyle(fontWeight: FontWeight.w600),
@@ -203,6 +132,7 @@ class _ServicioPageState extends State<ServicioPage>{
                       Padding(
                           padding: const EdgeInsets.only(top: 15),
                           child: TextFormField(
+                            controller: tipoServController,
                             decoration: const InputDecoration(
                                 hintText: '¿Que servicio desea cotizar?',
                                 hintStyle:
@@ -228,6 +158,7 @@ class _ServicioPageState extends State<ServicioPage>{
                           Padding(
                           padding: const EdgeInsets.only(top: 15),
                           child: TextFormField(
+                            controller: telefonoController,
                             decoration: const InputDecoration(
                                 hintText: 'Telefono',
                                 hintStyle:
@@ -267,16 +198,10 @@ class _ServicioPageState extends State<ServicioPage>{
                                       width: 0, style: BorderStyle.none),
                                 ),
                                 filled: true),enabled: false,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "El departamento es requerido";
-                              } else {
-                                return null;
-                              }
-                            },
                           )),Padding(
                           padding: const EdgeInsets.only(top: 15),
                           child: TextFormField(
+                            controller: municipioController,
                             decoration: const InputDecoration(
                                 hintText: 'Municipio',
                                 hintStyle:
@@ -302,6 +227,7 @@ class _ServicioPageState extends State<ServicioPage>{
                           Padding(
                           padding: const EdgeInsets.only(top: 15),
                           child: TextFormField(
+                            controller: direccionController,
                             decoration: const InputDecoration(
                                 hintText: 'Dirección',
                                 hintStyle:
@@ -330,7 +256,7 @@ class _ServicioPageState extends State<ServicioPage>{
                             width: double.infinity,
                             height: 45,
                             child: ElevatedButton(
-                                onPressed: () {
+                                onPressed: () async{
                                   if (_formKey.currentState!.validate()) {
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(SnackBar(
@@ -372,8 +298,17 @@ class _ServicioPageState extends State<ServicioPage>{
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => cardService(
-                                              )));
-                                }},
+                                              )
+                                              ),
+                                              );
+                                }  selectedId != null
+                                  ? await DatabaseHelper.instance.update(
+                                    Servicios(id: selectedId, nombre: nombreController.text, apellido: apellidosController.text, direccion: direccionController.text, fecha: fechaController.text, municipio: municipioController.text, telefono: telefonoController.text, tipoServ: tipoServController.text, )
+                                    )
+                                :await DatabaseHelper.instance.add(
+                                  Servicios(nombre: nombreController.text, apellido: apellidosController.text, direccion: direccionController.text, fecha: fechaController.text, municipio: municipioController.text, telefono: telefonoController.text, tipoServ: tipoServController.text,),
+                                );
+                                },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:
                                   Colors.black, // background (button) color
@@ -401,7 +336,7 @@ class Calendaroip extends StatefulWidget {
 
 class _CalendaroipState extends State<Calendaroip> {
   DateTime? _selectdate; 
-  var _currentTime = TimeOfDay.now();
+
   @override
   
   Widget build(BuildContext context) {
@@ -423,14 +358,6 @@ class _CalendaroipState extends State<Calendaroip> {
         (content : Text(" Ha selecionado esta fecha ${_selectdate}")));
       });
     });
-}
-Future<TimeOfDay?> getTime(){
-  return showTimePicker(context: context, 
-  initialTime: _currentTime,
-  builder: (context, child){
-    return Theme(data: ThemeData.dark(), child: Text(""));
-  }
-  );
 
 }
 }

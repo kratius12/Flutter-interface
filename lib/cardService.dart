@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:prueba/carObra.dart';
+import 'package:prueba/databasehelper.dart';
 import 'package:prueba/main.dart';
 import 'package:prueba/miperfil.dart';
 import 'package:prueba/servicio.dart';
@@ -15,10 +16,11 @@ class cardService extends StatelessWidget{
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.onPrimary,
+        backgroundColor: Theme.of(context).shadowColor,
+        title: Text("Citas agendadas"),
         leading: IconButton(
           icon: Icon(Icons.menu,
-          color: Colors.black
+          color: Colors.white
           ),
           onPressed: () {
             if (scaffoldKey.currentState!.isDrawerOpen) {
@@ -93,28 +95,63 @@ class cardService extends StatelessWidget{
         ),
       ),
       
-      body: Center(
-      child: Card(
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget> [
-            const ListTile(
-              leading: Icon(Icons.album, color: Colors.green,),
-              title: Text("Ronald Ortiz Arango"),
-              subtitle: Text("16/01/2024\n Estucado y pintado"),
-              
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget> [
-                TextButton.icon( icon: Icon(Icons.calendar_month), label: Text.rich(TextSpan(children: <InlineSpan>[WidgetSpan(child: Text("Editar"))])), onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                    const ServicioPage(title: "Servicio Page"))); },),
-                TextButton.icon( icon: Icon(Icons.cancel), label: Text.rich(TextSpan(children: <InlineSpan>[WidgetSpan(child: Text("Eliminar"))])), onPressed: () {  },),
-              ]
-          ),
-          ]
-        )
-      ),
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: FutureBuilder(
+          future: DatabaseHelper.getServices(),
+          builder: (context, snapshot){
+            if(snapshot.connectionState != ConnectionState.done){
+              return CircularProgressIndicator();
+            }
+            List<Servicios>? servicio = snapshot.data as List<Servicios>?;
+            Widget list;
+            if(servicio==null || servicio.isEmpty){
+              list= Text("No Hay ninguna cita agendada");
+            }else{
+              list= ListView.builder(
+                  itemCount: servicio.length,
+                  itemBuilder: (context, index){
+                    var s = servicio[index]; 
+                    return Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(1.0),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(1.0),
+                              
+                                child: Icon(Icons.album, color: Colors.green,),
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(s.nombre+" "+s.apellido),
+                                Text(s.fecha),
+                                Text(s.tipoServ),
+                              ],
+                            ),Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                TextButton.icon(icon: Icon(Icons.calendar_month), label: Text.rich(TextSpan(children: <InlineSpan>[WidgetSpan(child: Text("Editar"))])), onPressed:(){;
+                                } ,),
+                                TextButton.icon(icon: Icon(Icons.cancel), label: Text.rich(TextSpan(children: <InlineSpan>[WidgetSpan(child: Text("Eliminar"))])), onPressed:(){
+                                  
+                                } ,)
+                              ],
+                            )
+                          ]),
+                      ),
+                    );
+                  },
+                );
+            }
+            return Center(
+              child: SizedBox(
+                width: 350,
+                child: list
+            ));
+          },
+        ),
       ),floatingActionButton: bottom(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat, 
       );
