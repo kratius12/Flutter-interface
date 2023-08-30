@@ -135,7 +135,6 @@ class cardService extends StatelessWidget{
                                 TextButton.icon(icon: Icon(Icons.calendar_month), label: Text.rich(TextSpan(children: <InlineSpan>[WidgetSpan(child: Text("Editar"))])), onPressed:(){;
                                 } ,),
                                 TextButton.icon(icon: Icon(Icons.cancel), label: Text.rich(TextSpan(children: <InlineSpan>[WidgetSpan(child: Text("Eliminar"))])), onPressed:(){
-                                  
                                 } ,)
                               ],
                             )
