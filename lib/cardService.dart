@@ -125,7 +125,8 @@ class cardService extends StatelessWidget{
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(s.nombre+" "+s.apellido),
+                                
+                                Text(s.nombre+" "+s.apellido+" "),
                                 Text(s.fecha),
                                 Text(s.tipoServ),
                               ],
@@ -134,7 +135,8 @@ class cardService extends StatelessWidget{
                               children: <Widget>[
                                 TextButton.icon(icon: Icon(Icons.calendar_month), label: Text.rich(TextSpan(children: <InlineSpan>[WidgetSpan(child: Text("Editar"))])), onPressed:(){;
                                 } ,),
-                                TextButton.icon(icon: Icon(Icons.cancel), label: Text.rich(TextSpan(children: <InlineSpan>[WidgetSpan(child: Text("Eliminar"))])), onPressed:(){
+                                TextButton.icon(icon: Icon(Icons.cancel), label: Text.rich(TextSpan(children: <InlineSpan>[WidgetSpan(child: Text("Eliminar"))])), onPressed:()async{
+                                  await DatabaseHelper.instance.delete(id: s.id);
                                 } ,)
                               ],
                             )

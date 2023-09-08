@@ -84,13 +84,16 @@ class DatabaseHelper{
     Database db = await instance.database;
     return await db.insert('servicios', servicios.toMap());
   }
-  Future<int> remove(int id) async{
-    Database db = await instance.database;
-    return await db.delete('servicios', where: 'id = ?', whereArgs: [id]);
+   Future delete({id}) async{
+    final db = await database;
+    await db!.delete("servicios", where:'id=?', whereArgs:[id]);
+    print("Eliminado libro  ${id}");
+    return "Eliminado con exito!";
   }
-  Future<int> update(Servicios servicios) async{
-    Database db = await instance.database;
-    return await db.update('servicios', servicios.toMap(), where: 'id = ?', whereArgs: [servicios.id]);
-  }
+  // }
+  // Future<int> update(Servicios servicios) async{
+  //   Database db = await instance.database;
+  //   return await db.update('servicios', servicios.toMap(), where: 'id = ?', whereArgs: [servicios.id]);
+  // }
 
 } 
