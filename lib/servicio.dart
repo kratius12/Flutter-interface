@@ -294,33 +294,17 @@ class _ServicioPageState extends State<ServicioPage> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              const cardService()),
-                                    );
-                                  }
-                                  selectedId != null
-                                      ? await DatabaseHelper.instance
-                                          .update(Servicios(
-                                          id: selectedId,
-                                          nombre: nombreController.text,
-                                          apellido: apellidosController.text,
-                                          direccion: direccionController.text,
-                                          fecha: fechaController.text,
-                                          municipio: municipioController.text,
-                                          telefono: telefonoController.text,
-                                          tipoServ: tipoServController.text,
-                                        ))
-                                      : await DatabaseHelper.instance.add(
-                                          Servicios(
-                                            nombre: nombreController.text,
-                                            apellido: apellidosController.text,
-                                            direccion: direccionController.text,
-                                            fecha: fechaController.text,
-                                            municipio: municipioController.text,
-                                            telefono: telefonoController.text,
-                                            tipoServ: tipoServController.text,
-                                          ),
-                                        );
+                                          builder: (context) => cardService(
+                                              )
+                                              ),
+                                              );
+                                }  selectedId != null
+                                  ? await DatabaseHelper.instance.update(
+                                    Servicios(id: selectedId, nombre: nombreController.text, apellido: apellidosController.text, direccion: direccionController.text, fecha: fechaController.text, municipio: municipioController.text, telefono: telefonoController.text, tipoServ: tipoServController.text, )
+                                    )
+                                :await DatabaseHelper.instance.add(
+                                  Servicios(nombre: nombreController.text, apellido: apellidosController.text, direccion: direccionController.text, fecha: fechaController.text, municipio: municipioController.text, telefono: telefonoController.text, tipoServ: tipoServController.text,),
+                                );
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:

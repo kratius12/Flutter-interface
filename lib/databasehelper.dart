@@ -169,15 +169,13 @@ class DatabaseHelper {
     Database db = await instance.database;
     return await db.insert('servicios', servicios.toMap());
   }
-
-  static Future<int> remove(int id) async {
+  Future<int> remove(int id) async{
     Database db = await instance.database;
     return await db.delete('servicios', where: 'id = ?', whereArgs: [id]);
   }
-
-  Future<int> update(Servicios servicios) async {
+  Future<int> update(Servicios servicios) async{
     Database db = await instance.database;
-    return await db.update('servicios', servicios.toMap(),
-        where: 'id = ?', whereArgs: [servicios.id]);
+    return await db.update('servicios', servicios.toMap(), where: 'id = ?', whereArgs: [servicios.id]);
   }
-}
+
+} 
