@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:prueba/cardService.dart';
 import 'package:prueba/databasehelper.dart';
 
-class ServicioPage extends StatefulWidget {
-  const ServicioPage({super.key, required this.title});
+class UpdateService extends StatefulWidget {
+  const UpdateService({super.key, required this.title});
 
   final String title;
 
   @override
-  State<ServicioPage> createState() => _ServicioPageState();
+  State<UpdateService> createState() => _ServicioPageState();
 }
 
 // ignore: duplicate_ignore
-class _ServicioPageState extends State<ServicioPage> {
+class _ServicioPageState extends State<UpdateService> {
   // ignore: unused_field
   int? selectedId;
   Calendaroip calendario = const Calendaroip();
@@ -69,6 +69,9 @@ class _ServicioPageState extends State<ServicioPage> {
                                       width: 0, style: BorderStyle.none),
                                 ),
                                 filled: true),
+                            onSaved: (String? value) {
+                              nombreController.text;
+                            },
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "El nombre es requerido";
@@ -95,6 +98,9 @@ class _ServicioPageState extends State<ServicioPage> {
                                       width: 0, style: BorderStyle.none),
                                 ),
                                 filled: true),
+                            onSaved: (String? value) {
+                              apellidosController.text;
+                            },
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Los apellidos son requeridos";
@@ -142,6 +148,9 @@ class _ServicioPageState extends State<ServicioPage> {
                                       width: 0, style: BorderStyle.none),
                                 ),
                                 filled: true),
+                            onSaved: (String? value) {
+                              tipoServController.text;
+                            },
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "El servicio es requerido";
@@ -168,6 +177,9 @@ class _ServicioPageState extends State<ServicioPage> {
                                       width: 0, style: BorderStyle.none),
                                 ),
                                 filled: true),
+                            onSaved: (String? value) {
+                              telefonoController.text;
+                            },
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "El telefono es requerido";
@@ -213,6 +225,9 @@ class _ServicioPageState extends State<ServicioPage> {
                                       width: 0, style: BorderStyle.none),
                                 ),
                                 filled: true),
+                            onSaved: (String? value) {
+                              municipioController.text;
+                            },
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "El municipio es requerido";
@@ -239,6 +254,9 @@ class _ServicioPageState extends State<ServicioPage> {
                                       width: 0, style: BorderStyle.none),
                                 ),
                                 filled: true),
+                            onSaved: (String? value) {
+                              direccionController.text;
+                            },
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "La dirección es requerida";
@@ -269,7 +287,7 @@ class _ServicioPageState extends State<ServicioPage> {
                                             width: 5,
                                           ),
                                           Text(
-                                            "Servicio solicitado con exito!",
+                                            "Servicio actualizado con exito!",
                                             style: TextStyle(
                                                 color: Color.fromARGB(
                                                     255, 255, 255, 255)),
@@ -291,7 +309,7 @@ class _ServicioPageState extends State<ServicioPage> {
                                     ));
                                   }
                                   if (_formKey.currentState!.validate()) {
-                                    Navigator.push(
+                                    Navigator.pop(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
@@ -328,7 +346,7 @@ class _ServicioPageState extends State<ServicioPage> {
                                   foregroundColor:
                                       Colors.white, // foreground (text) color
                                 ),
-                                child: const Text('Solicitar')),
+                                child: const Text('Actualizar')),
                           )),
                     ],
                   ))

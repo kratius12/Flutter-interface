@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:prueba/databasehelper.dart';
 import 'package:prueba/login.dart';
-
 
 class _RegisterPageState extends State<RegisterPage> {
   SinginCharacter? _sex = SinginCharacter.femenino;
-
+  final int? selectedId = null;
   final _formKey = GlobalKey<FormState>();
+  final nombreController = TextEditingController();
+  final apellidoController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   String _password = '';
 
   @override
@@ -34,6 +38,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     Padding(
                         padding: const EdgeInsets.only(top: 30),
                         child: TextFormField(
+                          controller: nombreController,
                           decoration: const InputDecoration(
                               hintText: 'Nombre',
                               hintStyle: TextStyle(fontWeight: FontWeight.w600),
@@ -54,13 +59,13 @@ class _RegisterPageState extends State<RegisterPage> {
                             return null;
                           },
                           onSaved: (value) {
-                            setState(() {
-                            });
+                            setState(() {});
                           },
                         )),
                     Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: TextFormField(
+                          controller: apellidoController,
                           decoration: const InputDecoration(
                               hintText: 'Apellidos',
                               hintStyle: TextStyle(fontWeight: FontWeight.w600),
@@ -133,6 +138,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: TextFormField(
+                          controller: emailController,
                           decoration: const InputDecoration(
                               hintText: 'Email',
                               hintStyle: TextStyle(fontWeight: FontWeight.w600),
@@ -162,6 +168,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: TextFormField(
+                          controller: passwordController,
                           obscureText: true,
                           onChanged: (value) {
                             setState(() {
@@ -234,17 +241,18 @@ class _RegisterPageState extends State<RegisterPage> {
                           width: double.infinity,
                           height: 45,
                           child: ElevatedButton(
-                              onPressed: () {
+                              onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(SnackBar(
-                                    content: Row(
+                                    content: const Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: <Widget>[
                                         Icon(
                                           Icons.check_circle,
-                                          color: Color.fromARGB(255, 198, 198, 198),
+                                          color: Color.fromARGB(
+                                              255, 198, 198, 198),
                                         ),
                                         SizedBox(
                                           width: 5,
@@ -252,7 +260,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                         Text(
                                           "Usuario registrado con exito!",
                                           style: TextStyle(
-                                              color: Color.fromARGB(255, 198, 198, 198),),
+                                            color: Color.fromARGB(
+                                                255, 198, 198, 198),
+                                          ),
                                         )
                                       ],
                                     ),
@@ -268,15 +278,25 @@ class _RegisterPageState extends State<RegisterPage> {
                                     backgroundColor:
                                         const Color.fromARGB(255, 12, 195, 106),
                                   ));
-                                }if(_formKey.currentState!.validate()){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage(title: "Login ")));
+                                }
+                                if (_formKey.currentState!.validate()) {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => const LoginPage(
+                                              title: "Login ")));
+                                  await DatabaseHelper.register(Usuarios(
+                                      nombre: nombreController.text,
+                                      apellido: apellidoController.text,
+                                      email: emailController.text,
+                                      password: passwordController.text));
                                 }
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor:
                                     Colors.black, // background (button) color
-                                foregroundColor:
-                                    Color.fromARGB(255, 255, 255, 255), // foreground (text) color
+                                foregroundColor: const Color.fromARGB(255, 255,
+                                    255, 255), // foreground (text) color
                               ),
                               child: const Text('Enviar')),
                         )),
@@ -288,6 +308,8 @@ class _RegisterPageState extends State<RegisterPage> {
     ));
   }
 }
+
+// ignore: constant_identifier_names
 enum SinginCharacter { femenino, masculino, Otro }
 
 class RegisterPage extends StatefulWidget {

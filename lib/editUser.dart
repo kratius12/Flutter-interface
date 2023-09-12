@@ -1,17 +1,18 @@
-import 'package:flutter/material.dart';
+// ignore: file_names
+import 'package:flutter/material.dart' show AppBar, BorderRadius, BorderSide, BorderStyle, BuildContext, Center, Color, Colors, Column, Container, CrossAxisAlignment, EdgeInsets, ElevatedButton, FontWeight, Form, FormState, GlobalKey, Icon, Icons, InputDecoration, MainAxisAlignment, MaterialPageRoute, Navigator, OutlineInputBorder, Padding, RoundedRectangleBorder, Row, Scaffold, ScaffoldMessenger, SingleChildScrollView, SizedBox, SnackBar, SnackBarBehavior, State, StatefulWidget, Text, TextEditingController, TextFormField, TextStyle, Theme, Widget;
 import 'package:prueba/cardService.dart';
 import 'package:prueba/databasehelper.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key, required this.title});
+class EditUser extends StatefulWidget {
+  const EditUser({super.key, required this.title});
 
   final String title;
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<EditUser> createState() => _EditUser();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _EditUser extends State<EditUser> {
   final _formKey = GlobalKey<FormState>();
   final nombreController = TextEditingController();
   final apellidoController = TextEditingController();

@@ -15,7 +15,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-
         primarySwatch: Colors.blue,
       ),
       home: const HomePageApp(title: 'Flutter Demo Home Page'),
@@ -31,7 +30,7 @@ class HomePageApp extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title:  Column(
+        title: const Column(
           children: [
             Center(
               child: Text(
@@ -51,7 +50,7 @@ class HomePageApp extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 18, color: Color.fromARGB(255, 207, 47, 248)),
               ),
-              Image.network("https://i.imgur.com/knxT0t0.png", height: 200),
+              //Image.network("https://i.imgur.com/knxT0t0.png", height: 200),
               const Text(''),
               SizedBox(
                 width: 200,
